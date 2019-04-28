@@ -1,10 +1,8 @@
 # ref:
 # https://github.com/Valian/docker-python-opencv-ffmpeg/blob/master/Dockerfile-py3-cuda
 
-# ARG BASE_IMAGE="ubuntu"
-ARG BASE_IMAGE="nvidia/cuda:10.0-cudnn7-runtime-ubuntu16.04"
-
-FROM $BASE_IMAGE
+ARG CUDA_VERSION="10.0"
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn7-runtime-ubuntu16.04
 ARG OPENCV_VERSION="3.4.6"
 
 # Install all dependencies for OpenCV
@@ -28,7 +26,6 @@ RUN apt-get -y update && \
         libjpeg-dev \
         libpng-dev \
         libtiff-dev \
-        libjasper-dev \
         libv4l-dev \
     && \
 # install python dependencies
@@ -58,7 +55,7 @@ RUN mkdir /opencv/build && cd /opencv/build && \
       -D WITH_IPP=OFF \
       -D WITH_FFMPEG=ON \
       -D WITH_CUDA=ON \
-      -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+      -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
       -D WITH_CUBLAS=ON \
       -D WITH_V4L=ON .. \
     && \
@@ -81,7 +78,6 @@ RUN mkdir /opencv/build && cd /opencv/build && \
         libjpeg-dev \
         libpng-dev \
         libtiff-dev \
-        libjasper-dev \
         libv4l-dev \
     && \
     apt-get clean && \
