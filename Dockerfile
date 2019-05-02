@@ -3,7 +3,7 @@
 
 ARG CUDA_VERSION="10.0"
 FROM nvidia/cuda:${CUDA_VERSION}-cudnn7-runtime-ubuntu16.04
-ARG OPENCV_VERSION="3.4.6"
+ARG OPENCV_VERSION="4.1.0"
 
 # Install all dependencies for OpenCV
 RUN apt-get -y update && \
@@ -32,7 +32,7 @@ RUN apt-get -y update && \
     wget https://bootstrap.pypa.io/get-pip.py && \
     python3 get-pip.py && \
     rm get-pip.py && \
-    pip3 install numpy 
+    pip3 install numpy
 # Download OpenCV
 RUN wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip -O opencv3.zip && \
     unzip -q opencv3.zip && \
