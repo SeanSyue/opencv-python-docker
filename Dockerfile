@@ -2,7 +2,8 @@
 # https://github.com/Valian/docker-python-opencv-ffmpeg/blob/master/Dockerfile-py3-cuda
 
 ARG CUDA_VERSION="10.0"
-FROM nvidia/cuda:${CUDA_VERSION}-cudnn7-runtime-ubuntu16.04
+ARG FLAVOR="runtime"
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn7-${FLAVOR}-ubuntu16.04
 ARG OPENCV_VERSION="4.1.0"
 
 # Install all dependencies for OpenCV
